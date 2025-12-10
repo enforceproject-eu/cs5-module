@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: ENFORCE CS 5 Data Access API
+  description: "ENFORCE CS 5 Data Access API"
+  contact:
+    email: b.pross@52north.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+  - url: https://enforce.dev.52north.org/
+tags:
+  - name: access-control
+    description: the AccessControl API
+  - name: database-public
+    description: the public Database API
+paths:
+  /cs5_catchment_data:
+    get:
+      tags:
+        - cs5
+      summary: get data gathered by CS 5
+      description:  get data gathered by CS 5
+      operationId: getCs5Data
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.geo+json:
+              schema:
+                  $ref: '#/components/schemas/FeatureCollection'
+        "400":
+          description: Invalid status value
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+        "401":
+          description: API key is missing or invalid
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - cs5
+      summary: Add CS 5 data
+      description: Add CS 5 data 
+      operationId: addCs5DataAsBody
+      requestBody:
+        description: feature data
+        content:
+          application/enforce-cs5-data:
+              schema:
+                type: object                
+                additionalProperties:
+                  $ref: '#/components/schemas/Cs5DataRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+        "401":
+          description: API key is missing or invalid
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+        "405":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Error'
+components:
+    schemas:
+       Cs5DataRequest:
+         title: Cs5DataRequest
+         type: object
+         required:
+           - id
+           - features
+         properties:
+           "Unnamed: 0":
+              type: integer
+              format: int32
+           id:
+              type: string
+              format: uuid
+           long:
+              type: number
+              format: double
+           lat:
+              type: number
+              format: double
+           waterBodyType:
+              type: string
+           dynamicRiskAssessment:
+              type: boolean
+           estimatedWidth:
+              type: number
+              format: double
+           estimatedDepth:
+              type: number
+              format: double
+           waterFlow:
+              type: string
+           waterLevel:
+              type: string
+           temperature:
+              type: number
+              format: double
+           totalDissolvedSolids:
+              type: number
+              format: double
+           turbidity:
+              type: number
+              format: double
+           phosphate:
+              type: number
+              format: double
+           ph:
+              type: number
+              format: double
+           nitrate:
+              type: number
+              format: double
+           ammonia:
+              type: number
+              format: double
+           Date:
+              type: string
+              format: date
+           pollutionEvidence:
+             type: array
+             items:
+               type: string
+           pollutionSource:
+             type: array
+             items:
+               type: string
+           flowImpedance:
+             type: array
+             items:
+               type: string
+           invasivePlant:
+             type: array
+             items:
+               type: string
+           wildlife:
+             type: array
+             items:
+               type: string
+           bankVegetation:
+             type: array
+             items:
+               type: string
+           landUse:
+             type: array
+             items:
+               type: string
+       FeatureCollection:
+         title: FeatureCollection
+         type: object
+         required:
+           - type
+           - features
+         properties:
+           type:
+             type: string
+             enum:
+               - FeatureCollection
+           features:
+             type: array
+             items:
+               $ref: '#/components/schemas/FeatureGeoJSON'
+       FeatureGeoJSON:
+            type: object
+            required:
+              - type
+              - geometry
+              - properties
+            properties:
+              type:
+                type: string
+                enum:
+                  - Feature
+              geometry:
+                $ref: '#/components/schemas/GeometryGeoJSON'
+              properties:
+                type: object
+                nullable: true
+              id:
+                oneOf:
+                  - type: string
+                  - type: integer
+       GeometryGeoJSON:
+         oneOf:
+         - $ref: '#/components/schemas/PointGeoJSON'
+         - $ref: '#/components/schemas/MultipointGeoJSON'
+         - $ref: '#/components/schemas/MultipolygonGeoJSON'
+       PointGeoJSON:
+         type: object
+         required:
+           - type
+           - coordinates
+         properties:
+           type:
+             type: string
+             enum:
+               - Point
+           coordinates:
+             type: array
+             minItems: 2
+             items:
+               type: number
+       MultipointGeoJSON:
+         type: object
+         required:
+           - type
+           - coordinates
+         properties:
+           type:
+             type: string
+             enum:
+               - MultiPoint
+           coordinates:
+             type: array
+             items:
+               type: array
+               minItems: 2
+               items:
+                 type: number       
+       MultipolygonGeoJSON:
+          type: object
+          required:
+            - type
+            - coordinates
+          properties:
+            type:
+              type: string
+              enum:
+                - MultiPolygon
+            coordinates:
+              type: array
+              items:
+                type: array
+                items:
+                  type: array
+                  minItems: 4
+                  items:
+                    type: array
+                    minItems: 2
+                    items:
+                      type: number
+       Error:
+         type: object
+         required:
+           - message
+         properties:
+           message:
+             type: string

@@ -1,0 +1,85 @@
+{
+	"0": {
+		"Unnamed: 0": 14141,
+		"id": "27ad463f-3e4f-36ac-971f-e3440d8b1c14",
+		"long": -3.41,
+		"lat": 50.64,
+		"waterBodyType": "stream",
+		"dynamicRiskAssessment": true,
+		"estimatedWidth": 3.5,
+		"estimatedDepth": 0.5,
+		"waterFlow": "steady",
+		"waterLevel": "high",
+		"temperature": 14.0,
+		"totalDissolvedSolids": 165.0,
+		"turbidity": 240.01,
+		"phosphate": 0.0,
+		"ph": null,
+		"nitrate": null,
+		"ammonia": null,
+		"Date": "2023-01-08",
+		"pollutionEvidence": [
+			"None"
+		],
+		"pollutionSource": [
+			"None"
+		],
+		"flowImpedance": [
+			"None"
+		],
+		"invasivePlant": [
+			"None"
+		],
+		"wildlife": [
+			"None"
+		],
+		"bankVegetation": [
+			"Grass"
+		],
+		"landUse": [
+			"UrbanResidential",
+			"IndustrialOrCommercial",
+			"ParklandOrGardens"
+		]
+	},
+	"1": {
+		"Unnamed: 0": 12424,
+		"id": "481361df-2994-365c-b439-6c7f1d77f16c",
+		"long": -3.42,
+		"lat": 50.65,
+		"waterBodyType": "stream",
+		"dynamicRiskAssessment": true,
+		"estimatedWidth": 6.0,
+		"estimatedDepth": 0.5,
+		"waterFlow": "steady",
+		"waterLevel": "low",
+		"temperature": 10.6,
+		"totalDissolvedSolids": 261.0,
+		"turbidity": 11.99,
+		"phosphate": 100.0,
+		"ph": null,
+		"nitrate": null,
+		"ammonia": null,
+		"Date": "2023-05-10",
+		"pollutionEvidence": [
+			"None"
+		],
+		"pollutionSource": [
+			"None"
+		],
+		"flowImpedance": [],
+		"invasivePlant": [
+			"None"
+		],
+		"wildlife": [
+			"None"
+		],
+		"bankVegetation": [
+			"TreesOrShrubs",
+			"Grass"
+		],
+		"landUse": [
+			"MoorlandOrHeath"
+		]
+	}
+}
