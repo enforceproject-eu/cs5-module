@@ -77,6 +77,7 @@ public class Cs5Utils {
         Collection<Cs5DataRequest> values = inputMap.values();
         for (Cs5DataRequest cs5DataRequest : values) {
             cs5DataRepository.saveAndFlush(createCs5Data(cs5DataRequest));
+            LOG.info("Added CS 5 data with id: " + cs5DataRequest.getId());
         }
     }
     
@@ -145,15 +146,14 @@ public class Cs5Utils {
         result.setPh(node.getPh());
         result.setNitrate(node.getNitrate());
         result.setAmmonia(node.getAmmonia());
-        result.setDate(node.getDate());
-        
-//        result.setPollutionEvidence(getNodeValueAsList(node, "pollutionEvidence"));
-//        result.setPollutionSource(getNodeValueAsList(node, "pollutionSource"));
-//        result.setFlowImpedance(getNodeValueAsList(node, "flowImpedance"));
-//        result.setInvasivePlant(getNodeValueAsList(node, "invasivePlant"));
-//        result.setWildlife(getNodeValueAsList(node, "wildlife"));
-//        result.setBankVegetation(getNodeValueAsList(node, "bankVegetation"));
-//        result.setLandUse(getNodeValueAsList(node, "landUse"));        
+        result.setDate(node.getDate());        
+        result.setPollutionEvidence(getNodeValueAsList(node.getPollutionEvidence(), "pollutionEvidence"));
+        result.setPollutionSource(getNodeValueAsList(node.getPollutionSource(), "pollutionSource"));
+        result.setFlowImpedance(getNodeValueAsList(node.getFlowImpedance(), "flowImpedance"));
+        result.setInvasivePlant(getNodeValueAsList(node.getInvasivePlant(), "invasivePlant"));
+        result.setWildlife(getNodeValueAsList(node.getWildlife(), "wildlife"));
+        result.setBankVegetation(getNodeValueAsList(node.getBankVegetation(), "bankVegetation"));
+        result.setLandUse(getNodeValueAsList(node.getLandUse(), "landUse"));        
         return result;
     }
     
@@ -171,6 +171,37 @@ public class Cs5Utils {
             return valueNode.asText();
         }
         return null;
+    }
+    
+    private List<Integer> getNodeValueAsList(List<String> values,
+            String fieldName) {
+        List<Integer> result = new ArrayList<>();
+        List<Integer> defaultList = Arrays.asList(new Integer[] { 1 });
+        if(values == null || values.size() == 0) {
+            return defaultList;
+        }
+        Integer id = getIdForTypeName(fieldName);
+        if (id == null) {
+            // TODO
+            return defaultList;
+        }
+        for (int i = 0; i < values.size(); i++) {
+            String valueNodeIAsString = values.get(i);
+            if (valueNodeIAsString.equals("None")) {
+                result.add(1);
+            } else {
+                Optional<Cs5Types> cs5TypeFromDb = cs5TypesRepository.findByTypeAndName(id, valueNodeIAsString);
+                if (cs5TypeFromDb.isPresent()) {
+                    result.add(cs5TypeFromDb.get().getId());
+                } else {
+                    Cs5Types newCs5Type = new Cs5Types(id, valueNodeIAsString);
+                    newCs5Type = cs5TypesRepository.saveAndFlush(newCs5Type);
+                    result.add(newCs5Type.getId());
+                }
+            }
+        }
+
+        return result;
     }
     
     private List<Integer> getNodeValueAsList(JsonNode node, String fieldName) {        
@@ -208,7 +239,7 @@ public class Cs5Utils {
                 }                   
             }
         }
-        return defaultList;
+        return result;
     }
     
     private Point createPoint(String pointAsString) {
