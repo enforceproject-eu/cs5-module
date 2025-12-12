@@ -1,8 +1,6 @@
 package org.n52.project.enforce.cs5.api.impl.data;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import org.locationtech.jts.geom.Point;
@@ -78,11 +76,11 @@ public class Cs5Data {
     
     @Column(
             name = "nitrate")
-    private Double nitrate;
+    private String nitrate;
     
     @Column(
             name = "ammonia")
-    private Double ammonia;
+    private String ammonia;
     @Column(
             name = "date")
     private LocalDate date;
@@ -91,34 +89,6 @@ public class Cs5Data {
             name = "coordinate",
             columnDefinition = "geometry(Point,4326)")
     private Point coordinate;
-
-    @Column(
-            name = "pollution_evidence")
-    private List<Integer> pollutionEvidence = new ArrayList<>();
-
-    @Column(
-            name = "pollution_source")
-    private List<Integer> pollutionSource = new ArrayList<>();
-
-    @Column(
-            name = "flow_impedance")
-    private List<Integer> flowImpedance = new ArrayList<>();
-
-    @Column(
-            name = "invasive_plant")
-    private List<Integer> invasivePlant = new ArrayList<>();
-
-    @Column(
-            name = "wildlife")
-    private List<Integer> wildlife = new ArrayList<>();
-
-    @Column(
-            name = "bank_vegetation")
-    private List<Integer> bankVegetation = new ArrayList<>();
-
-    @Column(
-            name = "land_use")
-    private List<Integer> landUse = new ArrayList<>();
 
     public Cs5Data() { }
 
@@ -236,19 +206,19 @@ public class Cs5Data {
         this.ph = ph;
     }
 
-    public Double getNitrate() {
+    public String getNitrate() {
         return nitrate;
     }
 
-    public void setNitrate(Double nitrate) {
+    public void setNitrate(String nitrate) {
         this.nitrate = nitrate;
     }
 
-    public Double getAmmonia() {
+    public String getAmmonia() {
         return ammonia;
     }
 
-    public void setAmmonia(Double ammonia) {
+    public void setAmmonia(String ammonia) {
         this.ammonia = ammonia;
     }
 
@@ -258,62 +228,6 @@ public class Cs5Data {
 
     public void setCoordinate(Point coordinate) {
         this.coordinate = coordinate;
-    }
-
-    public List<Integer> getPollutionEvidence() {
-        return pollutionEvidence;
-    }
-
-    public void setPollutionEvidence(List<Integer> pollutionEvidence) {
-        this.pollutionEvidence = pollutionEvidence;
-    }
-
-    public List<Integer> getPollutionSource() {
-        return pollutionSource;
-    }
-
-    public void setPollutionSource(List<Integer> pollutionSource) {
-        this.pollutionSource = pollutionSource;
-    }
-
-    public List<Integer> getFlowImpedance() {
-        return flowImpedance;
-    }
-
-    public void setFlowImpedance(List<Integer> flowImpedance) {
-        this.flowImpedance = flowImpedance;
-    }
-
-    public List<Integer> getInvasivePlant() {
-        return invasivePlant;
-    }
-
-    public void setInvasivePlant(List<Integer> invasivePlant) {
-        this.invasivePlant = invasivePlant;
-    }
-
-    public List<Integer> getWildlife() {
-        return wildlife;
-    }
-
-    public void setWildlife(List<Integer> wildlife) {
-        this.wildlife = wildlife;
-    }
-
-    public List<Integer> getBankVegetation() {
-        return bankVegetation;
-    }
-
-    public void setBankVegetation(List<Integer> bankVegetation) {
-        this.bankVegetation = bankVegetation;
-    }
-
-    public List<Integer> getLandUse() {
-        return landUse;
-    }
-
-    public void setLandUse(List<Integer> landUse) {
-        this.landUse = landUse;
     }
 
     public LocalDate getDate() {

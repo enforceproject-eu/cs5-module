@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.n52.project.enforce.cs5.api.Cs5Api;
 import org.n52.project.enforce.cs5.model.Cs5DataRequest;
-import org.n52.project.enforce.cs5.model.FeatureCollection;
 import org.n52.project.enforce.cs5.utils.Cs5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +20,13 @@ public class Cs5ApiController implements Cs5Api {
 
     Cs5Utils cs5Utils;
 
+    Cs5DataRepository cs5DataRepository;
+    
+
     @Autowired
-    public Cs5ApiController(Cs5Utils cs5Utils) {
+    public Cs5ApiController(Cs5Utils cs5Utils, Cs5DataRepository cs5DataRepository) {
         this.cs5Utils = cs5Utils;
+        this.cs5DataRepository = cs5DataRepository;
     }
 
     @Override
@@ -33,8 +36,7 @@ public class Cs5ApiController implements Cs5Api {
     }
 
     @Override
-    public ResponseEntity<FeatureCollection> getCs5Data() {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<?> getCs5Data() {
+        return ResponseEntity.ok().body(cs5DataRepository.getGeoJson());
     }
 }

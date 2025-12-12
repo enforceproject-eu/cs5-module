@@ -147,11 +147,9 @@ components:
               type: number
               format: double
            nitrate:
-              type: number
-              format: double
+              type: string
            ammonia:
-              type: number
-              format: double
+              type: string
            Date:
               type: string
               format: date

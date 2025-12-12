@@ -17,6 +17,6 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-12-10T16:39:16.314395300+01:00[Europe/Berlin]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-12-12T14:19:19.299882+01:00[Europe/Berlin]", comments = "Generator version: 7.13.0")
 public interface FeatureGeoJSONId extends Serializable {
 }

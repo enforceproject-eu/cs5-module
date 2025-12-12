@@ -26,7 +26,7 @@ import jakarta.annotation.Generated;
  * Cs5DataRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-12-10T16:39:16.314395300+01:00[Europe/Berlin]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-12-12T14:19:19.299882+01:00[Europe/Berlin]", comments = "Generator version: 7.13.0")
 public class Cs5DataRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -61,9 +61,9 @@ public class Cs5DataRequest implements Serializable {
 
   private @Nullable Double ph;
 
-  private @Nullable Double nitrate;
+  private @Nullable String nitrate;
 
-  private @Nullable Double ammonia;
+  private @Nullable String ammonia;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private @Nullable LocalDate date;
@@ -400,7 +400,7 @@ public class Cs5DataRequest implements Serializable {
     this.ph = ph;
   }
 
-  public Cs5DataRequest nitrate(Double nitrate) {
+  public Cs5DataRequest nitrate(String nitrate) {
     this.nitrate = nitrate;
     return this;
   }
@@ -412,15 +412,15 @@ public class Cs5DataRequest implements Serializable {
   
   @Schema(name = "nitrate", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("nitrate")
-  public Double getNitrate() {
+  public String getNitrate() {
     return nitrate;
   }
 
-  public void setNitrate(Double nitrate) {
+  public void setNitrate(String nitrate) {
     this.nitrate = nitrate;
   }
 
-  public Cs5DataRequest ammonia(Double ammonia) {
+  public Cs5DataRequest ammonia(String ammonia) {
     this.ammonia = ammonia;
     return this;
   }
@@ -432,11 +432,11 @@ public class Cs5DataRequest implements Serializable {
   
   @Schema(name = "ammonia", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("ammonia")
-  public Double getAmmonia() {
+  public String getAmmonia() {
     return ammonia;
   }
 
-  public void setAmmonia(Double ammonia) {
+  public void setAmmonia(String ammonia) {
     this.ammonia = ammonia;
   }
 

@@ -20,6 +20,6 @@ public interface Cs5DataRepository extends JpaRepository<Cs5Data, Integer> {
      * 
      * @return a {@link String} object
      */
-    @Query("select ST_CS1DataToGeoJson()")
+    @Query("select ST_Cs5DataToGeoJson()")
     String getGeoJson();
 }

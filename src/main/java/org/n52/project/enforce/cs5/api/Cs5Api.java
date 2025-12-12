@@ -129,7 +129,7 @@ public interface Cs5Api {
         produces = { "application/vnd.geo+json", "application/json" }
     )
     
-    ResponseEntity<FeatureCollection> getCs5Data(
+    ResponseEntity<?> getCs5Data(
         
     );
 
