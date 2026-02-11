@@ -49,7 +49,7 @@ public class Cs5MessageConverter extends AbstractHttpMessageConverter<Map<?,?>> 
     }
 
     @Override
-    protected MediaType getDefaultContentType(Map t) throws IOException {
+    protected MediaType getDefaultContentType(Map<?, ?> t) throws IOException {
         return CS5_CATCHMENT_DATA;
     }    
     
