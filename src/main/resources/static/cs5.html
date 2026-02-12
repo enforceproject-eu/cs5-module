@@ -12,6 +12,7 @@
 <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 	rel="stylesheet" />
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://leaflet.github.io/Leaflet.markercluster/dist//leaflet.markercluster-src.js"></script>
 
 <style>
 html, body {
@@ -98,12 +99,23 @@ img.half {
                 const response = await fetch(`${GEOSERVER_URL}?${params}`);
                 const features = await response.json();
 
+        		var markers = L.markerClusterGroup();
+                
+
                 if (!!this.featureLayer) {
                     this.map.removeLayer(this.featureLayer);
                 }
                 
                 this.featureLayer = L.geoJSON(features, {
-                    onEachFeature: (feature, layer) => {  
+                    pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
+                        radius: 3,
+                        color: "blue",
+                        fillColor: "blue",
+                        fillOpacity: 1,
+                    }),
+                    onEachFeature: (feature, layer) => {
+                        var title = "feature";
+            			var marker = L.marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), { title: title });
                         var content = "<h1>Water body type: " + feature.properties.water_body_type + "</h1>";
         			    content = content.concat("<h2>Observed at: " + feature.properties.date + "<h2/>");
                         var tableInner = "";
@@ -131,9 +143,12 @@ img.half {
                         + tableInner
                         +  "</table>";
 					    layer.bindPopup(customPopup);
+					    marker.bindPopup(customPopup);
+            			markers.addLayer(marker);
                     }
                 
-                }).addTo(this.map);
+                });
+                markers.addTo(this.map);
 
             }
 
