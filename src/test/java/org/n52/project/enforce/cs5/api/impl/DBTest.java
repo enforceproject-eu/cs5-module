@@ -1,8 +1,8 @@
 package org.n52.project.enforce.cs5.api.impl;
 
 import org.n52.project.enforce.cs5.utils.Cs5Utils;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -17,9 +17,11 @@ import org.testcontainers.junit.jupiter.Testcontainers;
         replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = Application.class)
 @ComponentScan(basePackageClasses = { Cs5Utils.class})
+//@ComponentScan(basePackages = {"org.n52.project.enforce.cs5.**" })
+//@ApplicationModuleTest
 public abstract class DBTest {
 
-    static JdbcDatabaseContainer<?> database = new PostgisContainerProvider().newInstance()
+    static JdbcDatabaseContainer<?> database = new PostgisContainerProvider().newInstance("18-3.6")
             .withDatabaseName("integration-tests-db").withUsername("sa").withPassword("sa");
 
     static {

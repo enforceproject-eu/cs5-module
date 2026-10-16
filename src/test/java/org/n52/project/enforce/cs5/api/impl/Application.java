@@ -1,8 +1,8 @@
 package org.n52.project.enforce.cs5.api.impl;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.persistence.autoconfigure.EntityScan;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  */
 @SpringBootApplication
 @EntityScan(basePackages = {
-"org.n52.project.enforce.cs5.api.impl*"})
+"org.n52.project.enforce.cs5.api.impl"})
 public class Application {
 
     /**

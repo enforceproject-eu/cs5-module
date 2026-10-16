@@ -9,12 +9,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>cs5-module</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<properties>	
-        <openapi-codegen.version>7.13.0</openapi-codegen.version>
-		<openapi-spec>/src/main/resources/specs/data-management/enforce_cs5_dataAccessAPI.yaml</openapi-spec>
+	<properties>
+        <openapi-spec>/src/main/resources/specs/data-management/enforce_cs5_dataAccessAPI.yaml</openapi-spec>
 		<base-package>org.n52.project.enforce.cs5</base-package>
-        <org.springframework.boot.version>3.5.8</org.springframework.boot.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-        <org.flywaydb.version>11.0.0</org.flywaydb.version>
+		<argLine><!-- Allow access to the tests during test-time -->
+				 --add-opens org.n52.project.enforce.cs5/org.n52.project.enforce.cs5.api.impl=spring.core
+				 --add-opens org.n52.project.enforce.cs5/org.n52.project.enforce.cs5.api.impl=spring.beans
+		</argLine>
 	</properties> 
 </project>

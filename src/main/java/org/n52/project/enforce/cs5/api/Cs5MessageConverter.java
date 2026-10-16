@@ -15,21 +15,21 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
 public class Cs5MessageConverter extends AbstractHttpMessageConverter<Map<?,?>> {
 
     public static final MediaType CS5_CATCHMENT_DATA =
             new MediaType("application", "enforce-cs5-data");
 
-    ObjectMapper objectMapper = new ObjectMapper().registerModule(javaTimeModule());
+    ObjectMapper objectMapper = new ObjectMapper();
+//    ObjectMapper objectMapper = new ObjectMapper().registerModule(javaTimeModule());
     
-    @Bean
-    public JavaTimeModule javaTimeModule() {
-        return new JavaTimeModule();
-    }
+//    @Bean
+//    public JavaTimeModule javaTimeModule() {
+//        return new JavaTimeModule();
+//    }
     
     @Override
     protected boolean supports(Class<?> clazz) {
