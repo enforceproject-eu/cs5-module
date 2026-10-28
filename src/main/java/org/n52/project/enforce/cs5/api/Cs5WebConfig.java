@@ -16,11 +16,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class Cs5WebConfig implements WebMvcConfigurer {
-    
-    /** {@inheritDoc} */
+
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
-        messageConverters.add(new Cs5MessageConverter());
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new Cs5MessageConverter());
     }
     
 }

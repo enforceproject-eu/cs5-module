@@ -1,5 +1,8 @@
 package org.n52.project.enforce.cs5.api.impl.data;
 
+import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import org.n52.project.enforce.cs5.api.Cs5Api;
@@ -30,13 +33,20 @@ public class Cs5ApiController implements Cs5Api {
     }
 
     @Override
-    public ResponseEntity<Void> addCs5DataAsBody(@Valid Map<String, Cs5DataRequest> requestBody) {
+    public ResponseEntity<Serializable> addCs5DataAsBody(@Valid Map<String, Cs5DataRequest> requestBody) {
         cs5Utils.readMap(requestBody);
-        return null;
+        URI locationUri;
+        try {
+            locationUri = new URI("/cs5_catchment_data");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+        return ResponseEntity.created(locationUri).build();
     }
 
     @Override
-    public ResponseEntity<?> getCs5Data() {
+    public ResponseEntity<Serializable> getCs5Data() {
         return ResponseEntity.ok().body(cs5DataRepository.getGeoJson());
     }
 }

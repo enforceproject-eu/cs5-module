@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.n52.project.enforce.cs5.model.Cs5DataRequest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -15,8 +14,8 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Cs5MessageConverter extends AbstractHttpMessageConverter<Map<?,?>> {
 
@@ -33,8 +32,15 @@ public class Cs5MessageConverter extends AbstractHttpMessageConverter<Map<?,?>> 
     
     @Override
     protected boolean supports(Class<?> clazz) {
+        System.out.println(clazz);
+        System.out.println(Map.class.isAssignableFrom(clazz));
         return Map.class.isAssignableFrom(clazz);
     }
+
+//    @Override
+//    protected boolean canWrite(MediaType mediaType) {        
+//        return CS5_CATCHMENT_DATA.equals(mediaType);
+//    }
 
     @Override
     protected Map<?,?> readInternal(Class<? extends Map<?,?>> clazz,
@@ -45,7 +51,8 @@ public class Cs5MessageConverter extends AbstractHttpMessageConverter<Map<?,?>> 
     @Override
     protected void writeInternal(Map<?,?> t,
             HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-//        IOUtils.copyLarge(t, outputMessage.getBody());
+       System.out.println(t);
+//       objectMapper.writer().writeValue(outputMessage.getBody(), t);
     }
 
     @Override

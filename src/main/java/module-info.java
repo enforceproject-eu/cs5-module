@@ -15,9 +15,11 @@ module org.n52.project.enforce.cs5 {
     requires org.locationtech.jts;
     requires spring.core;
     requires org.slf4j;
-    requires tools.jackson.core;
-    requires tools.jackson.databind;
+//    requires tools.jackson.core;
+//    requires tools.jackson.databind;
     requires org.openapitools.jackson.nullable;
+    requires com.fasterxml.jackson.annotation;
+    requires com.fasterxml.jackson.databind;
     opens org.n52.project.enforce.cs5.api.impl.data_types;
     opens org.n52.project.enforce.cs5.api.impl.types;
     opens org.n52.project.enforce.cs5.api.impl.data;
