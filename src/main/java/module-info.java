@@ -20,6 +20,7 @@ module org.n52.project.enforce.cs5 {
     requires org.openapitools.jackson.nullable;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
+    requires org.springdoc.openapi.common;
     opens org.n52.project.enforce.cs5.api.impl.data_types;
     opens org.n52.project.enforce.cs5.api.impl.types;
     opens org.n52.project.enforce.cs5.api.impl.data;
